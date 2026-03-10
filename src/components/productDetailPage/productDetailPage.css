@@ -1,0 +1,127 @@
+/* Contenedor principal centrado con margen superior */
+.product-detail-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: var(--primary-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Header del producto */
+.product-header {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.product-nombre {
+  font-size: 2.2rem;
+  color: #333;
+  margin: 0;
+}
+
+/* Layout de contenido: Imagen a la izquierda, info a la derecha */
+.product-content {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap; /* Para que colapse en celulares */
+}
+
+/* Sección de imagen */
+.product-image-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.product-imagen {
+  width: 50%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Sección de información */
+.product-info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 300px;
+}
+
+.product-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Sección de precio */
+.product-price-section {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--secondary-purple);
+}
+
+.product-precio {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.price-details {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
+/* Botón de compra */
+.agregar-carrito-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.agregar-carrito {
+  width: 100%;
+  background-color: var(--secondary-purple);
+  color: var(--primary-white);
+  border: none;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  text-transform: uppercase;
+}
+
+.agregar-carrito:hover {
+  background-color: rgb(36, 4, 78); /* Un naranja un poco más oscuro */
+  transform: translateY(-2px);
+}
+
+/* Responsive: Cuando la pantalla es chica, se apilan */
+@media (max-width: 768px) {
+  .product-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center; /* Centra la imagen y la info en el celular */
+  }
+
+  .product-image-section, 
+  .product-info-section {
+    min-width: 100%; /* Obliga a cada parte a usar todo el ancho disponible */
+    text-align: center; /* Opcional: centra el texto para que se vea mejor en móviles */
+  }
+
+  .product-price-section {
+    text-align: left; /* Mantiene el precio alineado a la izquierda dentro de su caja */
+  }
+  
+  .product-nombre {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}

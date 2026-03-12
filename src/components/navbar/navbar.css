@@ -1,13 +1,40 @@
 .navbar-bg {
   background-color: var(--primary-purple);
   font-size: 1.5rem;
-  height: 8rem;
+  height: 5rem;
   padding: 1rem 1rem;
 }
 
 .navbar {
   color: var(--primary-white);
   margin: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-section-center{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-section-left {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1
+}
+
+.navbar-section-right {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.navbar-section.right {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 .brand{

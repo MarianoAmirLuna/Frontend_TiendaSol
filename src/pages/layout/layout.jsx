@@ -5,7 +5,7 @@ import Navbar from "../../components/navbar/navbar.jsx";
 const Layout = () => {
     return(
         <>
-          <Header username="Tienda sol"></Header>
+          <Header></Header>
           <Navbar></Navbar>
           <Outlet />
         </>

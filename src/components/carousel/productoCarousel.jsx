@@ -1,11 +1,14 @@
 import './productoCarousel.css'
-import React, { useState } from "react";
-import productos from '../mockProductos/productos';
+import React, { useState, useEffect } from "react";
 import CarouselItem from './carouselItem';
 
-export default function ProductoCarousel() {
+export default function ProductoCarousel({productos}) {
   const [index, setIndex] = useState(0);
   const visible = 3;
+
+  useEffect(() => {
+    setIndex(0);
+    }, [productos]);
 
   const siguiente = () => {
     if (index < productos.length - visible) setIndex(index + 1);

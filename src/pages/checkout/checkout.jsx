@@ -1,0 +1,129 @@
+import React, { useState } from 'react';
+import { Card, TextField, Button } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import './checkout.css';
+
+function CheckOut({ carrito, limpiarCarrito }) {
+    const inicializarCampo = (requerido = true) => ({ valor: '', requerido });
+    const navigate = useNavigate()
+
+    const inicializarCampos = () => ({
+        nombre: inicializarCampo(),
+        segundoNombre: inicializarCampo(false),
+        apellido: inicializarCampo(),
+        email: inicializarCampo(),
+        repetirEmail: inicializarCampo(),
+        fechaEntrada: inicializarCampo(),
+        fechaSalida: inicializarCampo()
+    });
+
+    const [campos, setCampos] = useState(inicializarCampos());
+
+    const camposCompletos = Object.values(campos)
+        .filter(campo => campo.requerido)
+        .every(campo => campo.valor.trim() !== '');
+
+    const setValorDe = (campo) => (event) => {
+        setCampos(prev => ({
+            ...prev,
+            [campo]: { ...prev[campo], valor: event.target.value }
+        }));
+    };
+
+    const handleComprar = () => {
+        alert('Compra realizada exitosamente');
+        limpiarCarrito();
+        navigate("/")
+    };
+
+    return (
+        <div className="root">
+            <Card className="form-container">
+                <h3>Ya casi estamos...</h3>
+                <div>
+                    {carrito.map((producto, index) => (
+                        <div key={index}>
+                            {producto.nombre}: ${producto.precio} x {producto.cantidadCompras} = ${producto.precio * producto.cantidadCompras}
+                        </div>
+                    ))}
+                </div>
+
+                <form>
+                    <TextField
+                        label="Nombre"
+                        required
+                        fullWidth
+                        margin="normal"
+                        value={campos.nombre.valor}
+                        onChange={setValorDe('nombre')}
+                    />
+                    <TextField
+                        label="Segundo nombre"
+                        fullWidth
+                        margin="normal"
+                        value={campos.segundoNombre.valor}
+                        onChange={setValorDe('segundoNombre')}
+                    />
+                    <TextField
+                        label="Apellido"
+                        required
+                        fullWidth
+                        margin="normal"
+                        value={campos.apellido.valor}
+                        onChange={setValorDe('apellido')}
+                    />
+                    <TextField
+                        label="Email"
+                        required
+                        fullWidth
+                        margin="normal"
+                        type="email"
+                        value={campos.email.valor}
+                        onChange={setValorDe('email')}
+                    />
+                    <TextField
+                        label="Repetir Email"
+                        required
+                        fullWidth
+                        margin="normal"
+                        type="email"
+                        value={campos.repetirEmail.valor}
+                        onChange={setValorDe('repetirEmail')}
+                    />
+                    <TextField
+                        label="Fecha de entrada"
+                        required
+                        fullWidth
+                        margin="normal"
+                        type="date"
+                        InputLabelProps={{ shrink: true }}
+                        value={campos.fechaEntrada.valor}
+                        onChange={setValorDe('fechaEntrada')}
+                    />
+                    <TextField
+                        label="Fecha de salida"
+                        required
+                        fullWidth
+                        margin="normal"
+                        type="date"
+                        InputLabelProps={{ shrink: true }}
+                        value={campos.fechaSalida.valor}
+                        onChange={setValorDe('fechaSalida')}
+                    />
+                    <div className="actions">
+                        <Button onClick={() => { }}>Cancelar</Button>
+                        <Button
+                            variant="contained"
+                            disabled={!camposCompletos}
+                            onClick={handleComprar}
+                        >
+                            Comprar
+                        </Button>
+                    </div>
+                </form>
+            </Card>
+        </div>
+    );
+};
+
+export default CheckOut

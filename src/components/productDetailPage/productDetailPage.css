@@ -2,7 +2,7 @@
 .product-detail-container {
   max-width: 1000px;
   margin: 2rem auto;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: var(--primary-white);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -17,29 +17,33 @@
 
 .product-nombre {
   font-size: 2.2rem;
+  font-weight: 700;
   color: #333;
   margin: 0;
 }
 
-/* Layout de contenido: Imagen a la izquierda, info a la derecha */
+/* Layout de contenido */
 .product-content {
   display: flex;
   gap: 3rem;
-  flex-wrap: wrap; /* Para que colapse en celulares */
+  flex-wrap: wrap;
 }
 
 /* Sección de imagen */
 .product-image-section {
-  flex: 1;
-  min-width: 300px;
+  flex: 1.2;
+  min-width: 320px;
+  display: flex;
+  justify-content: center;
 }
 
 .product-imagen {
-  width: 50%;
+  width: 100%;
+  max-width: 450px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
 /* Sección de información */
@@ -57,30 +61,42 @@
   color: #555;
 }
 
-/* Sección de precio */
+/* --- MODIFICADO: Sección de precio con Flexbox --- */
 .product-price-section {
-  background-color: #f9f9f9;
+  background-color: #fcfcfc;
   padding: 1.5rem;
   border-radius: 8px;
-  border-left: 4px solid var(--secondary-purple);
+  border-left: 5px solid var(--secondary-purple);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+  
+  /* Flexbox para separar precio del contador */
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; /* Centra verticalmente el precio con los botones */
 }
 
 .product-precio {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 800;
   color: #222;
 }
 
 .price-details {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #888;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
 }
 
-/* Botón de compra */
+/* Estilo para el contenedor del ButtonGroup */
+.product-solicitar-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* --- Botón de compra --- */
 .agregar-carrito-container {
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .agregar-carrito {
@@ -88,40 +104,48 @@
   background-color: var(--secondary-purple);
   color: var(--primary-white);
   border: none;
-  padding: 1.2rem;
-  font-size: 1.2rem;
+  padding: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: all 0.3s ease;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.agregar-carrito:hover {
-  background-color: rgb(36, 4, 78); /* Un naranja un poco más oscuro */
-  transform: translateY(-2px);
+.agregar-carrito:hover:not(:disabled) {
+  background-color: #4a148c;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(106, 27, 154, 0.3);
 }
 
-/* Responsive: Cuando la pantalla es chica, se apilan */
+.agregar-carrito:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+  .product-price-section {
+    flex-direction: column; /* En móvil, mejor uno abajo del otro */
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .product-solicitar-container {
+    width: 100%;
+    justify-content: center; /* Centramos el contador en móviles */
+  }
+
   .product-content {
     flex-direction: column;
-    gap: 1.5rem;
-    align-items: center; /* Centra la imagen y la info en el celular */
+    align-items: center;
   }
 
   .product-image-section, 
   .product-info-section {
-    min-width: 100%; /* Obliga a cada parte a usar todo el ancho disponible */
-    text-align: center; /* Opcional: centra el texto para que se vea mejor en móviles */
-  }
-
-  .product-price-section {
-    text-align: left; /* Mantiene el precio alineado a la izquierda dentro de su caja */
-  }
-  
-  .product-nombre {
-    font-size: 1.6rem;
+    min-width: 100%;
     text-align: center;
   }
 }

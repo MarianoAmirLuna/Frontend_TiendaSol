@@ -1,0 +1,95 @@
+/* Contenedor principal que ocupa toda la pantalla para centrar la Card */
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Empieza un poco arriba */
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: #f4f4f7; /* Un gris muy tenue de fondo */
+}
+
+/* Card del formulario */
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 2.5rem;
+  border-radius: 15px !important; /* !important por si MUI lo sobreescribe */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.form-container h3 {
+  font-size: 1.8rem;
+  color: var(--secondary-purple); /* Usando tu variable de color */
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Estilo para la lista de productos en el checkout */
+.form-container > div {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--secondary-purple);
+}
+
+.form-container > div div {
+  font-size: 0.95rem;
+  color: #555;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.form-container > div div:last-child {
+  border-bottom: none;
+}
+
+/* Contenedor de botones de acción */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+/* Estilizamos el botón de Comprar (MUI Contained) */
+.actions button:last-child {
+  background-color: var(--secondary-purple) !important;
+  padding: 0.8rem 2rem;
+  font-weight: bold;
+}
+
+.actions button:last-child:disabled {
+  background-color: #ccc !important;
+  color: #888 !important;
+}
+
+/* Estilo para el botón Cancelar */
+.actions button:first-child {
+  color: #777;
+}
+
+/* Responsive para celulares */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1.5rem;
+  }
+  
+  .actions {
+    flex-direction: column-reverse; /* El botón comprar queda arriba del cancelar */
+  }
+  
+  .actions button {
+    width: 100%;
+  }
+}
+
+.MuiPaper-root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

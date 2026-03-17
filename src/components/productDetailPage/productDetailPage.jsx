@@ -1,10 +1,40 @@
 import './productDetailPage.css'
 import productos from '../mockProductos/productos';
 import { useParams } from "react-router-dom";
+import { ButtonGroup, Button } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
-function ProductDetailPage() {
+const conCompras = (cantidadCompras, producto) => ({ ...producto, cantidadCompras })
+
+function ProductDetailPage({ carrito, actualizarCarrito }) {
+    const navigate = useNavigate()
     const { id } = useParams();
     const producto = productos.find(p => p._id === id);
+
+    const [cantProductosEnCarrito, setProductosEnCarrito] = useState(0);
+
+    useEffect(() => {
+        setProductosEnCarrito(0);
+    }, [id, carrito]);
+
+    const incrementarProductos = () => {
+        const nuevosProductos = cantProductosEnCarrito + 1;
+        setProductosEnCarrito(nuevosProductos);
+    };
+
+    const decrementarProductos = () => {
+        if (cantProductosEnCarrito > 0) {
+            const nuevosProductos = cantProductosEnCarrito - 1;
+            setProductosEnCarrito(nuevosProductos);
+        }
+    };
+
+    const agregar = () => {
+        actualizarCarrito(conCompras(cantProductosEnCarrito, producto))
+        navigate("/")
+    }
+
 
     if (!producto) {
         return (
@@ -38,12 +68,25 @@ function ProductDetailPage() {
                     </div>
 
                     <div className="product-price-section">
-                        <div className="product-precio">$ {producto.precio?.toLocaleString()}</div>
-                        <div className="price-details">Impuestos incluidos</div>
+                        <div className="price-group">
+                            <div className="product-precio">$ {producto.precio?.toLocaleString()}</div>
+                            <div className="price-details">Impuestos incluidos</div>
+                        </div>
+
+                        <div className="product-solicitar-container">
+                            <ButtonGroup variant="outlined" aria-label="outlined button group">
+                                <Button onClick={decrementarProductos} disabled={cantProductosEnCarrito === 0}>-</Button>
+                                <Button disabled>{cantProductosEnCarrito}</Button>
+                                <Button onClick={incrementarProductos}>+</Button>
+                            </ButtonGroup>
+                        </div>
                     </div>
                 </div>
                 <div className="agregar-carrito-container">
-                    <button className="agregar-carrito">Añadir al carrito</button>
+
+                    <button className="agregar-carrito" disabled={cantProductosEnCarrito === 0} onClick={agregar}>
+                        Añadir al carrito
+                    </button>
                 </div>
             </div>
         </div>

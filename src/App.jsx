@@ -1,7 +1,7 @@
 
 import './App.css'
 import ProductDetailPage from './components/productDetailPage/productDetailPage.jsx'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/home.jsx'
 import Layout from './pages/layout/layout.jsx'
 import CheckOut from './pages/checkout/checkout.jsx'
@@ -31,7 +31,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout carrito={carrito} />}>
 
@@ -48,7 +47,6 @@ function App() {
             <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
           </Route>
         </Routes>
-      </BrowserRouter>
     </ThemeProvider>
   )
 }

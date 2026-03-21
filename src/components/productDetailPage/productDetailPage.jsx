@@ -4,18 +4,30 @@ import { useParams } from "react-router-dom";
 import { ButtonGroup, Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { getProductoById } from '../../services/productoService.js';
 
 const conCompras = (cantidadCompras, producto) => ({ ...producto, cantidadCompras })
 
 function ProductDetailPage({ carrito, actualizarCarrito }) {
     const navigate = useNavigate()
     const { id } = useParams();
-    const producto = productos.find(p => p._id === id);
 
+    const [producto, setProducto] = useState(null);
     const [cantProductosEnCarrito, setProductosEnCarrito] = useState(0);
+
+    const cargarProducto = async () => {
+        try {
+            const data = await getProductoById(id);
+            setProducto(data);
+        } catch (error) {
+            console.error("Error al cargar el producto:", error);
+            setProducto(null);
+        }
+    };
 
     useEffect(() => {
         setProductosEnCarrito(0);
+        cargarProducto();
     }, [id, carrito]);
 
     const incrementarProductos = () => {
